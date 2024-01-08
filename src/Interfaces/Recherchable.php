@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Interfaces;
+
 interface Recherchable {
-    // Code
+    public function rechercheParTitre($rechercheTitre);
+    public function rechercheParAuteur($rechercheAuteur);
+    public function rechercheParAnnee($rechercheAnnee);
 }
