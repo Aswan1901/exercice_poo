@@ -5,10 +5,10 @@ require __DIR__ .'/../vendor/autoload.php';
 use App\Models\Livre;
 use App\Models\LivreSpecialise;
 
-$lePetitPrince = new Livre("Le petit prince", "Antoine de Saint-Exupery","1943");
-$laGuerreDuPavot = new Livre("La guerre du pavot", "R. F. Kuang ","2020");
-$crimeEtChatiment = new Livre("Crime et Châtiment", "Fiodor Dostoïevski","1866");
-$empireUltime = new Livre("L'Empire ultime", "Brandon Sanderson","2006");
+$lePetitPrince = new Livre("le petit prince", "Antoine de Saint-Exupery","1943");
+$laGuerreDuPavot = new Livre("la guerre du pavot", "R. F. Kuang ","2020");
+$crimeEtChatiment = new Livre("crime et châtiment", "Fiodor Dostoïevski","1866");
+$empireUltime = new Livre("l'Empire ultime", "Brandon Sanderson","2006");
 
 // echo "livre par defaut : \n";
 // echo "Titre : " . $livreDefaut->getTitre() . "\n";
@@ -25,16 +25,23 @@ $amour = new LivreSpecialise("amour");
 // echo $horreur->getDomaine();
 
 echo "Quel livre recherchez-vous ? ";
-$recherche = readline();
+$recherche = strtolower(readline());
+$bookFound = false;
+
 
 foreach($livres as $livre){
-    if($livre->rechercheParTitre($recherche)){
+    if($livre->rechercheParTitre(strtolower($recherche))){
         echo "Informations sur le livre :\n";
-        echo "Titre: " . strtolower($livre->getTitre()) . "\n" ;
-        echo "Auteur: " . $livre->getAuteur() ;
+        echo "Titre: " . $livre->getTitre() . "\n" ;
+        echo "Auteur: " . $livre->getAuteur() . "\n";
         echo "Année: " . $livre->getAnneePublication() . "\n";
-    }else{
-        echo "livre non trouvé \n";
+        $bookFound = true;
+        break;
+  
+    }
+
+    if(!$bookFound){
+        echo "Livres non trouvé \n";
     }
 
 

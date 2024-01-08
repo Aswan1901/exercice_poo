@@ -25,7 +25,7 @@ class Livre implements Recherchable{
         return $this->auteur;
     }
     public function getAnneePublication(){
-        return $this->titre;
+        return $this->anneePublication;
     }
     public function setTitre($titre){
         return $this->titre = $titre;
