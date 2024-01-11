@@ -8,15 +8,15 @@ class Livre implements Recherchable{
     private $titre;
     private $auteur;
     private $anneePublication;
+    private $genre;
 
 
     public function __construct($titre, $auteur, $anneePublication){
     $this->titre = $titre;
     $this->auteur = $auteur;
     $this->anneePublication = $anneePublication;
-
     }
-// GETTERS 
+
     public function getTitre(){
         return $this->titre;
     }
@@ -32,10 +32,29 @@ class Livre implements Recherchable{
     }
 
     public function setAuteur($auteur){
-        return $this->auteur;
+        return $this->auteur = $auteur;
     }
-    public function setAnneePublication($AnneePublication){
-        return $this->anneePublication;
+
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+
+
+
+
+
+
+    public function setAnneePublication($anneePublication){
+        return $this->anneePublication = $anneePublication;
     }
 
     public function rechercheParTitre($rechercheTitre){
@@ -44,7 +63,6 @@ class Livre implements Recherchable{
         }else{
             return null;
         }
-
     }
     public function rechercheParAuteur($rechercheAuteur){
         if($this->auteur === $rechercheAuteur){
@@ -60,4 +78,7 @@ class Livre implements Recherchable{
             return null;
         }
     }
+
+
+
 }

@@ -5,45 +5,91 @@ require __DIR__ .'/../vendor/autoload.php';
 use App\Models\Livre;
 use App\Models\LivreSpecialise;
 
-$lePetitPrince = new Livre("le petit prince", "Antoine de Saint-Exupery","1943");
-$laGuerreDuPavot = new Livre("la guerre du pavot", "R. F. Kuang ","2020");
-$crimeEtChatiment = new Livre("crime et châtiment", "Fiodor Dostoïevski","1866");
-$empireUltime = new Livre("l'Empire ultime", "Brandon Sanderson","2006");
+$lePetitPrince = new LivreSpecialise("le petit prince", "Antoine de Saint-Exupery","1943",["enfant"]);
+$laGuerreDuPavot = new LivreSpecialise("la guerre du pavot", "R.F Kuang","2020",["fantasy"]);
+$crimeEtChatiment = new LivreSpecialise("crime et châtiment", "Fiodor Dostoïevski","1866",["Classiques"]);
+$empireUltime = new LivreSpecialise("l'Empire ultime", "Brandon Sanderson","2006",["fantasy"]);
+$puitAscension = new LivreSpecialise("le puit de l'ascension", "Brandon Sanderson","2007",["fantasy"]);
+$Simetierre = new LivreSpecialise("Simetierre","Stephen King", "1983",["horreur"]);
 
-// echo "livre par defaut : \n";
-// echo "Titre : " . $livreDefaut->getTitre() . "\n";
-// echo "Auteur : " . $livreDefaut->getAuteur() . "\n";
-// echo "Année de publication : " . $livreDefaut->getAnneePublication() . "\n";
 
-$livres = [$lePetitPrince, $laGuerreDuPavot, $crimeEtChatiment, $empireUltime];
+$livres = [
+    $lePetitPrince, 
+    $laGuerreDuPavot,
+    $crimeEtChatiment,
+    $empireUltime,
+    $puitAscension,
+    $simetierre
+];
 
-$horreur = new LivreSpecialise("horreur");
-$fantastique = new LivreSpecialise("fantastique");
-$aventure = new LivreSpecialise("aventure");
-$amour = new LivreSpecialise("amour");
-
-// echo $horreur->getDomaine();
-
-echo "Quel livre recherchez-vous ? ";
+echo "rechercher un livre par titre (1) \n";
+echo "rechercher un titre par auteur (2) \n";
+echo "rechercher un livre par auteur(3) \n";
+echo "rechercher un livre par genre(4)";
 $recherche = strtolower(readline());
+// $bookFound = false;
+
+if($recherche === "1"){
+ 
+echo "rechercher un livre par titre ?";
+$rechercheTitre = strtolower(readline());
 $bookFound = false;
 
-
 foreach($livres as $livre){
-    if($livre->rechercheParTitre(strtolower($recherche))){
-        echo "Informations sur le livre :\n";
+    if($livre->rechercheParTitre($rechercheTitre)){
         echo "Titre: " . $livre->getTitre() . "\n" ;
         echo "Auteur: " . $livre->getAuteur() . "\n";
         echo "Année: " . $livre->getAnneePublication() . "\n";
         $bookFound = true;
-        break;
-  
+    }else{
+        if(!$bookFound){
+        echo "Livre non trouvé \n";
     }
-
-    if(!$bookFound){
-        echo "Livres non trouvé \n";
-    }
-
-
-
 }
+}
+}elseif($recherche === "2"){
+
+        echo "rechercher un livre par auteur ? ";
+        $rechercheAuteur = readline();
+        $bookFound = false;
+
+    foreach($livres as $livre){
+        if($livre->rechercheParAuteur($rechercheAuteur)){
+            echo "Titre: " . $livre->getTitre() . "\n" ;
+            echo "Auteur: " . $livre->getAuteur() . "\n";
+            echo "Année: " . $livre->getAnneePublication() . "\n";
+            $bookFound = true;
+        }else{
+        if(!$bookFound){
+        echo "Livre non trouvé \n";
+        }
+
+    }
+}
+}elseif($recherche === "3"){
+    echo "recherche un livre par annee ?";
+    $rechercheAnnee = readline();
+    $bookFound = false;
+    foreach($livres as $livre){
+        if($livre->rechercheParAnnee($rechercheAnnee)){
+            echo "Titre: " . $livre->getTitre() . "\n" ;
+            echo "Auteur: " . $livre->getAuteur() . "\n";
+            echo "Année: " . $livre->getAnneePublication() . "\n";
+            $bookFound = true;
+        }else{
+        if(!$bookFound){
+        echo "Livre non trouvé \n";
+    }
+    }
+}
+
+}elseif($recherche === '4'){
+    echo "rechercher un livre par genre(4)";
+    $rechercheAnnee = readline();
+    $bookFound = false;
+    // foreach($livres->getGenre as $livre){
+
+    // }
+}
+
+

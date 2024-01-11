@@ -5,31 +5,20 @@ namespace App\Models;
 use App\Models\Livre;
 
 class LivreSpecialise extends Livre {
-    public $domaine;
 
-
-    public function __construct($domaine){
-    $this->domaine = $domaine;
+    private $genre = [];
+    public function __construct($titre, $auteur, $anneePublication, $genre){
+        parent::__construct($titre, $auteur, $anneePublication);
+        $this->genre = $genre;
+    }
+    public function getGenre()
+    {
+        return $this->genre;
     }
 
-    /**
-     * Get the value of domaine
-     */ 
-    public function getDomaine()
+    public function setGenre($genre)
     {
-        return $this->domaine;
-        
-    }
-
-    /**
-     * Set the value of domaine
-     *
-     * @return  self
-     */ 
-    public function setDomaine($domaine)
-    {
-        $this->domaine = $domaine;
-
+        $this->genre = $genre;
         return $this;
     }
 }
